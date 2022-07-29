@@ -38,8 +38,14 @@ export default function TextForm
         </div>
         
         <div className={`container text-${props.mode==='light'? 'secondary': 'light'}`}>
-            <h4>Your text summary</h4>
+            <h4><strong>Your text summary</strong></h4>
+            <hr />
             <p>Number of characters <b>{text.length}</b>, number of words <b>{text.length===0?0:text.replaceAll(/\s{2,}/g, ' ').trim().split(" ").length}</b></p>
+            <br />
+            <h4><strong>Preview</strong></h4>
+            <hr />
+            <p>{text}</p>
+            <br />
         </div>
     </>
   )
