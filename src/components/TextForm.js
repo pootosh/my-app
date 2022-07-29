@@ -6,18 +6,26 @@ export default function TextForm
 (props) {
     const [text, setText] = useState('');
     
-
     const handleUpClick = () => {
         let newText = text.toUpperCase();
-        props.showAlert("Submitted", "success");
+        props.showAlert("Converted to Upper Case", "success");
         setText(newText);
     }
 
     const handleOnChange = (event) => {
-        
         setText(event.target.value);
-        
-        
+    }
+
+    const handleLowClick = () => {
+        let newText = text.toLowerCase();
+        props.showAlert("Converted to Lower Case", "success");
+        setText(newText);
+    }
+
+    const handleCopyClick = () => {
+        let copyText = document.getElementById("textBox");
+        copyText.select();
+        navigator.clipboard.writeText(copyText.value);
     }
 
   return (
@@ -25,15 +33,18 @@ export default function TextForm
         <div className={`mb-3 container mt-5  text-${props.mode==='light'? 'secondary': 'light'}`}>
             <label htmlFor="myBox" className="form-label" ><b>{props.title}</b></label>
             <textarea className="form-control" 
-                id="exampleFormControlTextarea1" 
+                id="textBox" 
                 rows="3" value={text} 
                 onChange={handleOnChange}
                 placeholder="Enter something"
                 style={{backgroundColor: props.mode==="light"?"white":"darkgray"}}
                 >
             </textarea>
+            
             <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-                <button type="button" className="btn btn-dark my-4" onClickCapture={handleUpClick}>Submit</button>
+                <button type="button" className="btn btn-dark my-4" onClickCapture={handleCopyClick}>Copy Text</button>
+                <button type="button" className="btn btn-dark my-4" onClickCapture={handleLowClick}>Lower Case</button>
+                <button type="button" className="btn btn-dark my-4" onClickCapture={handleUpClick}>Upper Case</button>
             </div>
         </div>
         
