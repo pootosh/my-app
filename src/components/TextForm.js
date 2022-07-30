@@ -24,13 +24,15 @@ export default function TextForm
 
     const handleCopyClick = () => {
         let copyText = document.getElementById("textBox");
+        copyText.select();
         navigator.clipboard.writeText(copyText.value);
+        document.getSelection().removeAllRanges();
         props.showAlert("Text copied!", "success");
     }
 
   return (
     <>
-        <div className={`mb-3 container mt-5  text-${props.mode==='light'? 'secondary': 'light'}`}>
+        <div className={`mb-3 container text-${props.mode==='light'? 'secondary': 'light'}`}>
             <label htmlFor="myBox" className="form-label" ><b>{props.title}</b></label>
             <textarea className="form-control" 
                 id="textBox" 
@@ -42,9 +44,9 @@ export default function TextForm
             </textarea>
             
             <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-                <button type="button" className="btn btn-dark my-4" onClickCapture={handleCopyClick}>Copy Text</button>
-                <button type="button" className="btn btn-dark my-4" onClickCapture={handleLowClick}>Lower Case</button>
-                <button type="button" className="btn btn-dark my-4" onClickCapture={handleUpClick}>Upper Case</button>
+                <button type="button" className="btn btn-dark my-4" onClickCapture={handleCopyClick} disabled={text.length===0}>Copy Text</button>
+                <button type="button" className="btn btn-dark my-4" onClickCapture={handleLowClick} disabled={text.length===0}>Lower Case</button>
+                <button type="button" className="btn btn-dark my-4" onClickCapture={handleUpClick} disabled={text.length===0}>Upper Case</button>
             </div>
         </div>
         
